@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trading Lab — Learn Trading Without Guesswork</title>
+<meta name="description" content="A beginner-first trading roadmap focused on education, risk management and practice.">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<nav>
+  <a class="logo" href="/">TRADING<span>LAB</span></a>
+  <div class="navlinks">
+    <a href="#roadmap">Roadmap</a>
+    <a href="#tools">Tools</a>
+    <a href="#start">Start</a>
+  </div>
+  <a class="btn primary" href="#start">Start Free</a>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="eyebrow">Beginner-first trading education</div>
+    <h1>Learn to trade.<br><span>Don't learn by losing.</span></h1>
+    <p>A structured path from complete beginner to a disciplined trading process — with risk tools, practice and a clear strategy framework.</p>
+    <div class="actions">
+      <a id="heroCta" class="btn primary" href="#start">Start Learning Free →</a>
+      <a class="btn secondary" href="#tools">See the tools</a>
+    </div>
+    <small>Educational content only. Trading involves substantial risk. No profits are guaranteed.</small>
+  </div>
+</header>
+
+<section id="roadmap" class="section">
+  <div class="container">
+    <h2>Stop jumping between random trading videos.</h2>
+    <p class="muted">Follow one structured path.</p>
+    <div class="grid">
+      <article><b>01</b><h3>Understand the market</h3><p>Forex, Gold, indices, leverage, spreads, margin and order types.</p></article>
+      <article><b>02</b><h3>Control your risk</h3><p>Position sizing, stop loss, drawdown and risk/reward.</p></article>
+      <article><b>03</b><h3>Read price</h3><p>Market structure, liquidity, BOS, CHOCH and FVGs.</p></article>
+      <article><b>04</b><h3>Build one setup</h3><p>Clear entry, invalidation and exit rules.</p></article>
+      <article><b>05</b><h3>Practice first</h3><p>Backtest and use a demo account before risking serious money.</p></article>
+      <article><b>06</b><h3>Measure everything</h3><p>Journal trades and improve from evidence, not emotion.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="tools" class="section dark">
+  <div class="container">
+    <h2>Tools that turn learning into practice.</h2>
+    <div class="grid">
+      <article><b>RISK CALCULATOR</b><h3>Know your risk before you enter.</h3><p>Calculate position sizing from account balance, risk percentage and stop-loss distance.</p></article>
+      <article><b>TRADING JOURNAL</b><h3>Find what is actually working.</h3><p>Track setups, mistakes, R-multiples and performance.</p></article>
+      <article><b>BEGINNER ROADMAP</b><h3>Know what to learn next.</h3><p>Progress through concepts in the right order instead of consuming endless content.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="start" class="section">
+  <div class="container signup">
+    <div>
+      <div class="eyebrow">Free access</div>
+      <h2>Start building your trading process.</h2>
+      <p class="muted">Join the early Trading Lab list. We'll use it to deliver the roadmap and future tools.</p>
+    </div>
+    <form id="signupForm">
+      <input id="email" type="email" placeholder="Your email address" required>
+      <button class="btn primary" type="submit">Join Free →</button>
+      <div id="message"></div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div>© 2026 Trading Lab</div>
+  <a id="exnessLink" href="/go/exness?source=footer">Open a broker account →</a>
+  <div>Affiliate relationships will be disclosed.</div>
+</footer>
+
+<script>
+const params = new URLSearchParams(location.search);
+const source = params.get("utm_source") || params.get("source") || "direct";
+
+function track(event) {
+  fetch("/api/event", {
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({event, source})
+  }).catch(()=>{});
+}
+track("page_view");
+
+document.getElementById("heroCta").addEventListener("click", () => track("start_learning_click"));
+document.getElementById("exnessLink").addEventListener("click", () => track("exness_click"));
+
+document.getElementById("signupForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const message = document.getElementById("message");
+  const email = document.getElementById("email").value;
+  const r = await fetch("/api/signup", {
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({email, source})
+  });
+  const data = await r.json();
+  message.textContent = data.ok ? "You're in. Welcome to Trading Lab." : (data.error || "Something went wrong.");
+});
+</script>
+</body>
+</html>
