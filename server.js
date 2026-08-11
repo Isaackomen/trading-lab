@@ -26,8 +26,7 @@ db.exec(`
 `);
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public")));
-
+app.use(express.static(__dirname));
 function record(event, req, source) {
   db.prepare(`
     INSERT INTO events (event, source, referrer, user_agent)
