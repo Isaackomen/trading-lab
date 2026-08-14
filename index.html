@@ -104,7 +104,12 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
     body:JSON.stringify({email, source})
   });
   const data = await r.json();
-  message.textContent = data.ok ? "You're in. Welcome to Trading Lab." : (data.error || "Something went wrong.");
+  if(data.ok || r.status===409){
+      localStorage.setItem("tradingLabEmail", email);
+      window.location.href="/dashboard.html";
+    } else {
+      message.textContent = data.error || "Something went wrong.";
+    }
 });
 </script>
 </body>
