@@ -1,0 +1,13 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Trading Lab — Dashboard</title><link rel="stylesheet" href="/styles.css"></head><body>
+<nav><a class="logo" href="/">TRADING<span>LAB</span></a><a class="btn secondary" href="/">← Home</a></nav>
+<main class="section"><div class="container"><div class="eyebrow">Your learning dashboard</div><h1 class="dash-title">Build the trader before you build the account.</h1><p class="muted dash-intro">Work through the lessons in order. The goal is understanding and practice — not rushing to a live account.</p>
+<div class="progress-wrap"><div class="progress-top"><strong>Your progress</strong><span id="progressText">0 / 6 lessons</span></div><div class="progress-bar"><div id="progressBar"></div></div></div>
+<div class="lesson-grid">
+<article class="lesson"><span>LESSON 01</span><h2>What Is Trading?</h2><p>Understand what you're actually doing when you buy or sell a financial market.</p><a class="btn primary" href="/lesson-1.html">Start Lesson →</a></article>
+<article class="lesson locked"><span>LESSON 02</span><h2>Risk Management</h2><p>Learn how traders define risk before thinking about profit.</p><button disabled>Locked</button></article>
+<article class="lesson locked"><span>LESSON 03</span><h2>Reading Price</h2><p>Learn candles, highs, lows and basic market structure.</p><button disabled>Locked</button></article>
+<article class="lesson locked"><span>LESSON 04</span><h2>Liquidity</h2><p>Learn why obvious highs and lows matter to price movement.</p><button disabled>Locked</button></article>
+<article class="lesson locked"><span>LESSON 05</span><h2>Your First Setup</h2><p>Turn concepts into a repeatable set of trading conditions.</p><button disabled>Locked</button></article>
+<article class="lesson locked"><span>LESSON 06</span><h2>Practice & Journal</h2><p>Backtest, journal and evaluate your process before going live.</p><button disabled>Locked</button></article>
+</div><div class="warning"><strong>Important:</strong> Completing lessons does not mean you are ready to trade real money. Trading carries substantial risk.</div></div></main>
+<script>const d=JSON.parse(localStorage.getItem("tradingLabLessons")||"[]");document.getElementById("progressText").textContent=d.length+" / 6 lessons";document.getElementById("progressBar").style.width=(d.length/6*100)+"%";</script></body></html>
